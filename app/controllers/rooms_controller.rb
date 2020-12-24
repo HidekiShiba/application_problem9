@@ -11,6 +11,7 @@ class RoomsController < ApplicationController
     @messages = @room.messages
     @message = Message.new
     @entries = @room.entries
+    @another_entry = @room.entries.find_by('user_id != ?', current_user.id)
   end
 
   private

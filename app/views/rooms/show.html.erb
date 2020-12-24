@@ -1,8 +1,9 @@
+<h4><%= @another_entry.user.name %>さんとのチャット</h4>
 <% @messages.each do |message| %>
   <%= message.content %>
 <% end %>
 <%= form_with model: @message, local: true do |f| %>
   <%= f.text_field :content %>
   <%= f.hidden_field :room_id, value: @room.id %>
-  <%= f.submit '投稿' %>
+  <% f.submit '投稿' %>
 <% end %>
