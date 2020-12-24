@@ -1,7 +1,8 @@
 class MessagesController < ApplicationController
   def create
-      @message = Message.create((message_params).merge(user_id: current_user.id))
-      redirect_to request.referer
+    @message = Message.create((message_params).merge(user_id: current_user.id))
+    @room = Room.find(params[:message][:room_id])
+    @messages = @room.messages
   end
 
   private
