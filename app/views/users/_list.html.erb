@@ -23,6 +23,21 @@
         </tr>
       </tbody></table>
     </table>
+<%# ここから非同期 %>
+<% if @user.id == current_user.id %>
+<% else %>
+  <% if @isRoom == true %>
+    <%= link_to 'chatを始める', room_path(@roomId) %>
+  <% else %>
+    <%= form_with model: @room, local:true do |f| %>
+      <%= fields_for @entry do |e| %>
+        <%= e.hidden_field :user_id, value: @user.id %>
+      <% end %>
+      <%= f.submit 'chatを始める' %>
+    <% end %>
+  <% end %>
+<% end %>
+<%# ここまで %>
     <div class="row">
       <% if current_user == user %>
         <a class="btn btn-outline-secondary btn-block fas fa-user-cog" href="/users/<%= @user.id %>/edit"></a>
